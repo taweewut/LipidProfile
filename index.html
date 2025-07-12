@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cardiovascular Risk Infographic for Thai Individuals</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@1.4.0"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+        }
+       .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+           .chart-container {
+                height: 350px;
+            }
+        }
+       .flowchart-step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+       .flowchart-icon {
+            flex-shrink: 0;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-right: 1rem;
+        }
+       .flowchart-arrow {
+            font-size: 1.5rem;
+            color: #40739e;
+            margin: 0 1rem;
+        }
+        .correlation-box {
+            background-color: #e6f0f8;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            font-weight: 600;
+            color: #192a56;
+            margin: 0.5rem;
+            border: 1px solid #40739e;
+        }
+        .correlation-arrow {
+            font-size: 2rem;
+            color: #40739e;
+            margin: 0 0.5rem;
+            align-self: center;
+        }
+    </style>
+</head>
+<body class="text-[#2f3640]">
+    <div class="container mx-auto p-4 md:p-8">
+        <div class="flex justify-end mb-4">
+            <button id="lang-en" class="px-4 py-2 rounded-lg bg-[#40739e] text-white mr-2 shadow-md hover:bg-[#273c75] focus:outline-none focus:ring-2 focus:ring-[#40739e] focus:ring-opacity-50">English</button>
+            <button id="lang-th" class="px-4 py-2 rounded-lg bg-[#40739e] text-white shadow-md hover:bg-[#273c75] focus:outline-none focus:ring-2 focus:ring-[#40739e] focus:ring-opacity-50">ภาษาไทย</button>
+        </div>
+
+        <header class="text-center mb-12">
+            <h1 id="header-title" class="text-4xl md:text-5xl font-bold text-[#192a56] mb-4">A Runner's Guide to Heart Health: Thai-Specific Insights</h1>
+            <p id="header-subtitle" class="text-lg md:text-xl text-[#273c75] max-w-3xl mx-auto">This personalized overview synthesizes the latest research on cardiovascular risk for Thai individuals, leveraging wearable data and longitudinal tracking for a proactive approach to lifelong wellness.</p>
+        </header>
+
+        <main class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            
+            <div class="lg:col-span-2 bg-white rounded-lg shadow-md p-6">
+                <h2 id="section-tghdl-title" class="text-2xl font-bold text-[#192a56] mb-4">The Most Important Metric: TG/HDL Ratio for Thai Individuals</h2>
+                <p id="section-tghdl-text" class="mb-6 text-[#273c75]">While standard lipid panels are useful, the Triglyceride/HDL (TG/HDL) ratio is a more powerful predictor of cardiovascular risk, especially for Asian populations. Research shows that Thai individuals may face increased risk at lower TG/HDL ratios than Western populations. This phenomenon, known as the "lean Asian paradox," means a more stringent interpretation is necessary.</p>
+                
+                <div class="flex flex-col items-center justify-center mb-6">
+                    <div class="w-full max-w-lg h-8 flex rounded-lg overflow-hidden shadow-inner border">
+                        <div class="bg-green-500 flex items-center justify-center text-white font-bold" style="width: 50%;"><span id="tghdl-ideal-label">Ideal</span></div>
+                        <div class="bg-yellow-500 flex items-center justify-center text-white font-bold" style="width: 25%;"><span id="tghdl-borderline-label">Borderline</span></div>
+                        <div class="bg-red-500 flex items-center justify-center text-white font-bold" style="width: 25%;"><span id="tghdl-high-label">High Risk</span></div>
+                    </div>
+                    <div class="flex justify-between w-full max-w-lg mt-2 text-sm font-semibold text-[#2f3640]">
+                        <span class="text-left">&lt; 2.5</span>
+                        <span class="text-center">2.5 - 3.5</span>
+                        <span class="text-right">&ge; 3.5</span>
+                    </div>
+                </div>
+                <p id="tghdl-note1" class="text-sm text-[#273c75]">Based on studies in the Thai population, a TG/HDL ratio **below 2.5 is considered optimal**. Ratios above this level, particularly for older adults, indicate a significantly increased risk for cardiovascular events and warrant proactive lifestyle intervention.</p>
+            </div>
+
+            <div class="lg:col-span-2 bg-white rounded-lg shadow-md p-6">
+                <h2 id="section-activity-title" class="text-2xl font-bold text-[#192a56] mb-4">Your Runner's Advantage: Connecting Wearable Data to Heart Health</h2>
+                <p id="section-activity-intro" class="mb-6 text-[#273c75]">As a runner using a Garmin watch, you have a powerful tool to monitor the direct impact of your training on key health indicators. Consistent physical activity creates a positive feedback loop, improving your physiological metrics, which in turn leads to a healthier lipid profile and enhanced longevity.</p>
+                
+                <div class="flex flex-col md:flex-row flex-wrap justify-center items-stretch mt-6">
+                    <div class="correlation-box flex flex-col justify-center">
+                        <div class="text-3xl mb-2">🏃‍♂️</div>
+                        <span id="corr-box1">Consistent Running & Physical Activity</span>
+                    </div>
+                    <div class="correlation-arrow">&rarr;</div>
+                    <div class="correlation-box flex flex-col justify-center">
+                        <div class="text-3xl mb-2">📈</div>
+                        <span id="corr-box2">Improved Wearable Metrics (Lower RHR, Higher VO2 Max, Better Sleep)</span>
+                    </div>
+                    <div class="correlation-arrow">&rarr;</div>
+                    <div class="correlation-box flex flex-col justify-center">
+                        <div class="text-3xl mb-2">💓</div>
+                        <span id="corr-box3">Healthier Lipid Profile (Lower TG/HDL Ratio)</span>
+                    </div>
+                    <div class="correlation-arrow">&rarr;</div>
+                    <div class="correlation-box flex flex-col justify-center">
+                        <div class="text-3xl mb-2">❤️</div>
+                        <span id="corr-box4">Enhanced Longevity & Cardiovascular Wellness</span>
+                    </div>
+                </div>
+                 <p id="section-activity-metrics-title" class="mt-6 text-center font-semibold text-[#273c75]">Key Metrics like lower Resting Heart Rate (RHR) and higher VO2 Max are not just fitness scores; they are strong predictors of cardiovascular health and are directly associated with better lipid profiles.</p>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 id="section3-title" class="text-2xl font-bold text-[#192a56] mb-4">A Holistic View of Your Health</h2>
+                <p id="section3-text" class="mb-6 text-[#273c75]">Cardiovascular health doesn't exist in a vacuum. It is deeply interconnected with your metabolic health, kidney function, and inflammatory status. Monitoring these markers provides a complete picture of your body's overall wellness.</p>
+                <div class="chart-container h-96 max-h-[450px]">
+                    <canvas id="holisticViewChart"></canvas>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 id="section4-title" class="text-2xl font-bold text-[#192a56] mb-4">The Power of Your 5-Year Data</h2>
+                <p id="section4-text" class="mb-6 text-[#273c75]">A single test is a snapshot; five years of data is a movie of your health. This longitudinal view allows you to see the real impact of your lifestyle on your TG/HDL ratio, turning data into actionable knowledge.</p>
+                <div class="chart-container h-96 max-h-[450px]">
+                    <canvas id="trendChart"></canvas>
+                </div>
+            </div>
+
+            <div class="lg:col-span-2 bg-white rounded-lg shadow-md p-6">
+                 <h2 id="section1-title" class="text-2xl font-bold text-[#192a56] mb-4">Understanding the Standard Lipid Panel</h2>
+                <p id="section1-text" class="mb-6 text-[#273c75]">These are the foundational markers in any lipid test. While the TG/HDL ratio is key, understanding these components provides important context.</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                    <div class="bg-[#f0f4f8] p-4 rounded-lg">
+                        <h3 id="lipid1-title" class="font-bold text-[#192a56]">Total Cholesterol</h3>
+                        <p class="text-2xl font-bold text-[#40739e]">&lt;200 mg/dL</p>
+                    </div>
+                    <div class="bg-[#f0f4f8] p-4 rounded-lg">
+                        <h3 id="lipid2-title" class="font-bold text-[#192a56]">HDL Cholesterol</h3>
+                        <p class="text-2xl font-bold text-[#40739e]">&ge;60 mg/dL</p>
+                    </div>
+                    <div class="bg-[#f0f4f8] p-4 rounded-lg">
+                        <h3 id="lipid3-title" class="font-bold text-[#192a56]">LDL Cholesterol</h3>
+                        <p class="text-2xl font-bold text-[#40739e]">&lt;100 mg/dL</p>
+                    </div>
+                    <div class="bg-[#f0f4f8] p-4 rounded-lg">
+                        <h3 id="lipid4-title" class="font-bold text-[#192a56]">Triglycerides</h3>
+                        <p class="text-2xl font-bold text-[#40739e]">&lt;150 mg/dL</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="lg:col-span-2 bg-white rounded-lg shadow-md p-6">
+                <h2 id="section5-title" class="text-2xl font-bold text-[#192a56] mb-4">Actionable Lifestyle Roadmap</h2>
+                <p id="section5-text" class="mb-6 text-[#273c75]">Your daily habits are the most powerful tool you have. A holistic approach to lifestyle is the key to optimizing your numbers and ensuring long-term health.</p>
+                <div class="flex flex-col md:flex-row md:items-center justify-around">
+                    <div class="flowchart-step">
+                        <div class="flowchart-icon bg-[#487eb0] text-white">🥗</div>
+                        <div>
+                            <h3 id="lifestyle1-title" class="font-semibold text-[#192a56]">Heart-Healthy Nutrition</h3>
+                            <p id="lifestyle1-text" class="text-sm text-[#273c75]">Emphasize whole foods, healthy fats, and limit refined sugars.</p>
+                        </div>
+                    </div>
+                    <div class="flowchart-step">
+                        <div class="flowchart-icon bg-[#40739e] text-white">🧘</div>
+                        <div>
+                            <h3 id="lifestyle3-title" class="font-semibold text-[#192a56]">Stress & Sleep Management</h3>
+                            <p id="lifestyle3-text" class="text-sm text-[#273c75]">Prioritize 7-9 hours of quality sleep and practice mindfulness.</p>
+                        </div>
+                    </div>
+                     <div class="flowchart-step">
+                        <div class="flowchart-icon bg-[#273c75] text-white">⚖️</div>
+                        <div>
+                            <h3 id="lifestyle2-title" class="font-semibold text-[#192a56]">Weight Management</h3>
+                            <p id="lifestyle2-text" class="text-sm text-[#273c75]">Maintain a healthy BMI, noting the 18.5-22.9 range for Asians.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+        
+        <footer class="text-center mt-12 text-sm text-gray-500">
+            <p id="footer-disclaimer">This infographic is for informational purposes only and does not constitute medical advice. Consult with a healthcare professional for personalized guidance.</p>
+            <p id="footer-date">Data visualization created on Sat, 12 Jul 2025.</p>
+            <p id="footer-copyright" class="mt-2"> 
+                © CitytrailTalk & Citytrail Runners. All rights reserved.
+            </p>
+        </footer>
+    </div>
+
+<script>
+    function wrapLabels(label) {
+        if (typeof label === 'string' && label.length > 16) {
+            const words = label.split(' ');
+            let lines = [];
+            let currentLine = '';
+            words.forEach(word => {
+                if ((currentLine + ' ' + word).trim().length > 16) {
+                    lines.push(currentLine.trim());
+                    currentLine = word;
+                } else {
+                    currentLine = (currentLine + ' ' + word).trim();
+                }
+            });
+            lines.push(currentLine.trim());
+            return lines;
+        }
+        return label;
+    }
+
+    const tooltipTitleCallback = (tooltipItems) => {
+        const item = tooltipItems[0];
+        let label = item.chart.data.labels[item.dataIndex];
+        if (Array.isArray(label)) {
+            return label.join(' ');
+        }
+        return label;
+    };
+    
+    const brilliantBlues = {
+        darkest: '#192a56',
+        dark: '#273c75',
+        text: '#2f3640',
+        medium: '#40739e',
+        light: '#487eb0',
+        background: '#f0f4f8'
+    };
+
+    const translations = {
+        en: {
+            headerTitle: "A Runner's Guide to Heart Health: Thai-Specific Insights",
+            headerSubtitle: "This personalized overview synthesizes the latest research on cardiovascular risk for Thai individuals, leveraging wearable data and longitudinal tracking for a proactive approach to lifelong wellness.",
+            sectionTGHdlTitle: "The Most Important Metric: TG/HDL Ratio for Thai Individuals",
+            sectionTGHdlText: "While standard lipid panels are useful, the Triglyceride/HDL (TG/HDL) ratio is a more powerful predictor of cardiovascular risk, especially for Asian populations. Research shows that Thai individuals may face increased risk at lower TG/HDL ratios than Western populations. This phenomenon, known as the \"lean Asian paradox,\" means a more stringent interpretation is necessary.",
+            tghdlIdealLabel: "Ideal",
+            tghdlBorderlineLabel: "Borderline",
+            tghdlHighLabel: "High Risk",
+            tghdlNote1: "Based on studies in the Thai population, a TG/HDL ratio **below 2.5 is considered optimal**. Ratios above this level, particularly for older adults, indicate a significantly increased risk for cardiovascular events and warrant proactive lifestyle intervention.",
+            sectionActivityTitle: "Your Runner's Advantage: Connecting Wearable Data to Heart Health",
+            sectionActivityIntro: "As a runner using a Garmin watch, you have a powerful tool to monitor the direct impact of your training on key health indicators. Consistent physical activity creates a positive feedback loop, improving your physiological metrics, which in turn leads to a healthier lipid profile and enhanced longevity.",
+            corrBox1: "Consistent Running & Physical Activity",
+            corrBox2: "Improved Wearable Metrics (Lower RHR, Higher VO2 Max, Better Sleep)",
+            corrBox3: "Healthier Lipid Profile (Lower TG/HDL Ratio)",
+            corrBox4: "Enhanced Longevity & Cardiovascular Wellness",
+            sectionActivityMetricsTitle: "Key Metrics like lower Resting Heart Rate (RHR) and higher VO2 Max are not just fitness scores; they are strong predictors of cardiovascular health and are directly associated with better lipid profiles.",
+            section3Title: "A Holistic View of Your Health",
+            section3Text: "Cardiovascular health doesn't exist in a vacuum. It is deeply interconnected with your metabolic health, kidney function, and inflammatory status. Monitoring these markers provides a complete picture of your body's overall wellness.",
+            holisticChartTitle: "Interconnected Health Systems",
+            holisticDataset: "Impact on CVD Risk",
+            holisticLabel1: "Glucose Metabolism",
+            holisticLabel2: "Kidney Function",
+            holisticLabel3: "Inflammatory Status",
+            holisticLabel4: "Thyroid Function",
+            holisticLabel5: "Metabolic Health",
+            section4Title: "The Power of Your 5-Year Data",
+            section4Text: "A single test is a snapshot; five years of data is a movie of your health. This longitudinal view allows you to see the real impact of your lifestyle on your TG/HDL ratio, turning data into actionable knowledge.",
+            trendChartTitle: "5-Year TG/HDL Ratio Trend Analysis",
+            trendYAxis: "TG/HDL Ratio",
+            trendXAxis: "Quarterly Monitoring",
+            trendDataset: "Your TG/HDL Ratio",
+            trendAnnotation: "Thai-Specific Optimal Target (< 2.5)",
+            section1Title: "Understanding the Standard Lipid Panel",
+            section1Text: "These are the foundational markers in any lipid test. While the TG/HDL ratio is key, understanding these components provides important context.",
+            lipid1Title: "Total Cholesterol",
+            lipid2Title: "HDL Cholesterol",
+            lipid3Title: "LDL Cholesterol",
+            lipid4Title: "Triglycerides",
+            section5Title: "Actionable Lifestyle Roadmap",
+            section5Text: "Your daily habits are the most powerful tool you have. A holistic approach to lifestyle is the key to optimizing your numbers and ensuring long-term health.",
+            lifestyle1Title: "Heart-Healthy Nutrition",
+            lifestyle1Text: "Emphasize whole foods, healthy fats, and limit refined sugars.",
+            lifestyle2Title: "Weight Management",
+            lifestyle2Text: "Maintain a healthy BMI, noting the 18.5-22.9 range for Asians.",
+            lifestyle3Title: "Stress & Sleep Management",
+            lifestyle3Text: "Prioritize 7-9 hours of quality sleep and practice mindfulness.",
+            footerDisclaimer: "This infographic is for informational purposes only and does not constitute medical advice. Consult with a healthcare professional for personalized guidance.",
+            footerDate: "Data visualization created on Sat, 12 Jul 2025.",
+            footerCopyright: '© CitytrailTalk & Citytrail Runners. All rights reserved.'
+        },
+        th: {
+            headerTitle: "คู่มือนักวิ่งเพื่อสุขภาพหัวใจ: ข้อมูลเชิงลึกเฉพาะสำหรับคนไทย",
+            headerSubtitle: "ภาพรวมส่วนบุคคลนี้สังเคราะห์งานวิจัยล่าสุดเกี่ยวกับความเสี่ยงโรคหัวใจและหลอดเลือดสำหรับคนไทย โดยใช้ข้อมูลจากอุปกรณ์สวมใส่และการติดตามผลระยะยาวเพื่อแนวทางเชิงรุกสู่สุขภาพที่ดีตลอดชีวิต",
+            sectionTGHdlTitle: "ตัวชี้วัดที่สำคัญที่สุด: อัตราส่วน TG/HDL สำหรับคนไทย",
+            sectionTGHdlText: "แม้ว่าการตรวจวัดไขมันมาตรฐานจะมีประโยชน์ แต่อัตราส่วนไตรกลีเซอไรด์/HDL (TG/HDL) เป็นตัวทำนายความเสี่ยงโรคหัวใจและหลอดเลือดที่มีประสิทธิภาพมากกว่า โดยเฉพาะสำหรับประชากรชาวเอเชีย งานวิจัยแสดงให้เห็นว่าคนไทยอาจมีความเสี่ยงเพิ่มขึ้นที่อัตราส่วน TG/HDL ต่ำกว่าประชากรชาวตะวันตก ปรากฏการณ์นี้เรียกว่า \"lean Asian paradox\" ซึ่งหมายความว่าจำเป็นต้องมีการตีความที่เข้มงวดมากขึ้น",
+            tghdlIdealLabel: "เหมาะสม",
+            tghdlBorderlineLabel: "ปานกลาง",
+            tghdlHighLabel: "เสี่ยงสูง",
+            tghdlNote1: "จากการศึกษาในประชากรไทย อัตราส่วน TG/HDL **ต่ำกว่า 2.5 ถือว่าเหมาะสมที่สุด** อัตราส่วนที่สูงกว่าระดับนี้ โดยเฉพาะอย่างยิ่งสำหรับผู้สูงอายุ บ่งชี้ถึงความเสี่ยงที่เพิ่มขึ้นอย่างมีนัยสำคัญสำหรับโรคหัวใจและหลอดเลือด และจำเป็นต้องมีการปรับเปลี่ยนวิถีชีวิตเชิงรุก",
+            sectionActivityTitle: "ข้อได้เปรียบของนักวิ่ง: การเชื่อมโยงข้อมูลอุปกรณ์สวมใส่กับสุขภาพหัวใจ",
+            sectionActivityIntro: "ในฐานะนักวิ่งที่ใช้นาฬิกา Garmin คุณมีเครื่องมือที่มีประสิทธิภาพในการติดตามผลกระทบโดยตรงของการฝึกซ้อมต่อตัวชี้วัดสุขภาพที่สำคัญ การออกกำลังกายอย่างสม่ำเสมอสร้างวงจรตอบรับเชิงบวก ปรับปรุงตัวชี้วัดทางสรีรวิทยาของคุณ ซึ่งนำไปสู่โปรไฟล์ไขมันที่ดีต่อสุขภาพและอายุขัยที่ยืนยาวขึ้น",
+            corrBox1: "การวิ่งและการออกกำลังกายสม่ำเสมอ",
+            corrBox2: "ตัวชี้วัดจากอุปกรณ์ดีขึ้น (RHR ต่ำลง, VO2 Max สูงขึ้น, การนอนหลับดีขึ้น)",
+            corrBox3: "โปรไฟล์ไขมันที่ดีต่อสุขภาพ (อัตราส่วน TG/HDL ต่ำลง)",
+            corrBox4: "อายุยืนยาวและสุขภาพหัวใจดีขึ้น",
+            sectionActivityMetricsTitle: "ตัวชี้วัดสำคัญเช่น อัตราการเต้นของหัวใจขณะพัก (RHR) ที่ต่ำลง และ VO2 Max ที่สูงขึ้น ไม่ใช่แค่คะแนนความฟิต แต่เป็นตัวทำนายที่แข็งแกร่งของสุขภาพหัวใจและหลอดเลือดและสัมพันธ์โดยตรงกับโปรไฟล์ไขมันที่ดีขึ้น",
+            section3Title: "มุมมองแบบองค์รวมต่อสุขภาพของคุณ",
+            section3Text: "สุขภาพหัวใจและหลอดเลือดไม่ได้อยู่โดดเดี่ยว มันเชื่อมโยงอย่างลึกซึ้งกับสุขภาพเมตาบอลิซึม การทำงานของไต และสถานะการอักเสบของคุณ การติดตามตัวชี้วัดเหล่านี้ให้ภาพที่สมบูรณ์ของสุขภาวะโดยรวมของร่างกาย",
+            holisticChartTitle: "ระบบสุขภาพที่เชื่อมโยงกัน",
+            holisticDataset: "ผลกระทบต่อความเสี่ยง CVD",
+            holisticLabel1: "การเผาผลาญกลูโคส",
+            holisticLabel2: "การทำงานของไต",
+            holisticLabel3: "สถานะการอักเสบ",
+            holisticLabel4: "การทำงานของไทรอยด์",
+            holisticLabel5: "สุขภาพเมตาบอลิซึม",
+            section4Title: "พลังของข้อมูล 5 ปีของคุณ",
+            section4Text: "การทดสอบครั้งเดียวเป็นเพียงภาพนิ่ง ข้อมูลห้าปีคือภาพยนตร์เกี่ยวกับสุขภาพของคุณ มุมมองระยะยาวนี้ช่วยให้คุณเห็นผลกระทบที่แท้จริงของวิถีชีวิตของคุณต่ออัตราส่วน TG/HDL เปลี่ยนข้อมูลให้เป็นความรู้ที่นำไปปฏิบัติได้",
+            trendChartTitle: "การวิเคราะห์แนวโน้มอัตราส่วน TG/HDL 5 ปี",
+            trendYAxis: "อัตราส่วน TG/HDL",
+            trendXAxis: "การติดตามรายไตรมาส",
+            trendDataset: "อัตราส่วน TG/HDL ของคุณ",
+            trendAnnotation: "เป้าหมายที่เหมาะสมสำหรับคนไทย (< 2.5)",
+            section1Title: "ทำความเข้าใจการตรวจวัดไขมันมาตรฐาน",
+            section1Text: "นี่คือตัวชี้วัดพื้นฐานในการตรวจไขมันทุกครั้ง แม้ว่าอัตราส่วน TG/HDL จะเป็นกุญแจสำคัญ แต่การทำความเข้าใจส่วนประกอบเหล่านี้ก็ให้บริบทที่สำคัญ",
+            lipid1Title: "คอเลสเตอรอลรวม",
+            lipid2Title: "คอเลสเตอรอล HDL",
+            lipid3Title: "คอเลสเตอรอล LDL",
+            lipid4Title: "ไตรกลีเซอไรด์",
+            section5Title: "แผนการดำเนินชีวิตที่นำไปปฏิบัติได้",
+            section5Text: "นิสัยประจำวันของคุณเป็นเครื่องมือที่ทรงพลังที่สุดที่คุณมี แนวทางแบบองค์รวมต่อวิถีชีวิตเป็นกุญแจสำคัญในการปรับปรุงตัวเลขของคุณและรับประกันสุขภาพในระยะยาว",
+            lifestyle1Title: "โภชนาการที่ดีต่อหัวใจ",
+            lifestyle1Text: "เน้นอาหารจากธรรมชาติ ไขมันดี และจำกัดน้ำตาลขัดสี",
+            lifestyle2Title: "การจัดการน้ำหนัก",
+            lifestyle2Text: "รักษาน้ำหนักตัวให้เหมาะสม โดยคำนึงถึงช่วง BMI 18.5-22.9 สำหรับชาวเอเชีย",
+            lifestyle3Title: "การจัดการความเครียดและการนอนหลับ",
+            lifestyle3Text: "ให้ความสำคัญกับการนอนหลับที่มีคุณภาพ 7-9 ชั่วโมงและฝึกสติ",
+            footerDisclaimer: "อินโฟกราฟิกนี้มีวัตถุประสงค์เพื่อให้ข้อมูลเท่านั้นและไม่ถือเป็นคำแนะนำทางการแพทย์ โปรดปรึกษาผู้เชี่ยวชาญด้านสุขภาพเพื่อขอคำแนะนำส่วนบุคคล",
+            footerDate: "การแสดงข้อมูลสร้างเมื่อวันเสาร์ที่ 12 กรกฎาคม 2568",
+            footerCopyright: 'สงวนลิขสิทธิ์ โดย CitytrailTalk และ Citytrail Runners'
+        }
+    };
+
+    let currentLanguage = 'en';
+    let charts = {};
+
+    function updateContent() {
+        const lang = translations[currentLanguage];
+        document.getElementById('header-title').textContent = lang.headerTitle;
+        document.getElementById('header-subtitle').textContent = lang.headerSubtitle;
+        
+        document.getElementById('section-tghdl-title').textContent = lang.sectionTGHdlTitle;
+        document.getElementById('section-tghdl-text').textContent = lang.sectionTGHdlText;
+        document.getElementById('tghdl-ideal-label').textContent = lang.tghdlIdealLabel;
+        document.getElementById('tghdl-borderline-label').textContent = lang.tghdlBorderlineLabel;
+        document.getElementById('tghdl-high-label').textContent = lang.tghdlHighLabel;
+        document.getElementById('tghdl-note1').innerHTML = lang.tghdlNote1;
+
+        document.getElementById('section-activity-title').textContent = lang.sectionActivityTitle;
+        document.getElementById('section-activity-intro').textContent = lang.sectionActivityIntro;
+        document.getElementById('corr-box1').textContent = lang.corrBox1;
+        document.getElementById('corr-box2').textContent = lang.corrBox2;
+        document.getElementById('corr-box3').textContent = lang.corrBox3;
+        document.getElementById('corr-box4').textContent = lang.corrBox4;
+        document.getElementById('section-activity-metrics-title').textContent = lang.sectionActivityMetricsTitle;
+        
+        document.getElementById('section3-title').textContent = lang.section3Title;
+        document.getElementById('section3-text').textContent = lang.section3Text;
+        document.getElementById('section4-title').textContent = lang.section4Title;
+        document.getElementById('section4-text').textContent = lang.section4Text;
+        
+        document.getElementById('section1-title').textContent = lang.section1Title;
+        document.getElementById('section1-text').textContent = lang.section1Text;
+        document.getElementById('lipid1-title').textContent = lang.lipid1Title;
+        document.getElementById('lipid2-title').textContent = lang.lipid2Title;
+        document.getElementById('lipid3-title').textContent = lang.lipid3Title;
+        document.getElementById('lipid4-title').textContent = lang.lipid4Title;
+        
+        document.getElementById('section5-title').textContent = lang.section5Title;
+        document.getElementById('section5-text').textContent = lang.section5Text;
+        document.getElementById('lifestyle1-title').textContent = lang.lifestyle1Title;
+        document.getElementById('lifestyle1-text').textContent = lang.lifestyle1Text;
+        document.getElementById('lifestyle2-title').textContent = lang.lifestyle2Title;
+        document.getElementById('lifestyle2-text').textContent = lang.lifestyle2Text;
+        document.getElementById('lifestyle3-title').textContent = lang.lifestyle3Title;
+        document.getElementById('lifestyle3-text').textContent = lang.lifestyle3Text;
+        
+        document.getElementById('footer-disclaimer').textContent = lang.footerDisclaimer;
+        document.getElementById('footer-date').textContent = lang.footerDate;
+        document.getElementById('footer-copyright').textContent = lang.footerCopyright;
+
+        updateCharts();
+    }
+
+    function updateCharts() {
+        Object.values(charts).forEach(chart => chart.destroy());
+
+        const lang = translations[currentLanguage];
+
+        const holisticLabels = [lang.holisticLabel1, lang.holisticLabel2, lang.holisticLabel3, lang.holisticLabel4, lang.holisticLabel5].map(wrapLabels);
+        charts.holisticViewChart = new Chart(document.getElementById('holisticViewChart'), {
+            type: 'radar',
+            data: {
+                labels: holisticLabels,
+                datasets: [{
+                    label: lang.holisticDataset,
+                    data: [9, 8, 7, 7, 9],
+                    backgroundColor: 'rgba(64, 115, 158, 0.2)',
+                    borderColor: brilliantBlues.medium,
+                    pointBackgroundColor: brilliantBlues.medium,
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: brilliantBlues.medium
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        angleLines: { color: 'rgba(0,0,0,0.1)' },
+                        grid: { color: 'rgba(0,0,0,0.1)' },
+                        pointLabels: { font: { size: 12 }, color: brilliantBlues.text },
+                        suggestedMin: 0,
+                        suggestedMax: 10,
+                        ticks: { display: false }
+                    }
+                },
+                plugins: {
+                    title: { display: true, text: lang.holisticChartTitle, font: { size: 16 }, color: brilliantBlues.darkest },
+                    tooltip: { callbacks: { title: tooltipTitleCallback } },
+                    legend: { labels: { color: brilliantBlues.text } }
+                }
+            }
+        });
+
+        const trendLabels = [];
+        for (let i = 0; i < 20; i++) {
+            const year = 2021 + Math.floor(i / 4);
+            const quarter = (i % 4) + 1;
+            trendLabels.push(`Y${year}-Q${quarter}`);
+        }
+        const trendData = [3.8, 3.5, 3.2, 3.4, 3.1, 2.8, 2.9, 2.5, 2.6, 2.3, 2.4, 2.2, 2.1, 1.9, 2.0, 1.8, 1.7, 1.6, 1.8, 1.5];
+        charts.trendChart = new Chart(document.getElementById('trendChart'), {
+            type: 'line',
+            data: {
+                labels: trendLabels,
+                datasets: [{
+                    label: lang.trendDataset,
+                    data: trendData,
+                    borderColor: brilliantBlues.darkest,
+                    backgroundColor: 'rgba(25, 42, 86, 0.1)',
+                    fill: true,
+                    tension: 0.3
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        title: { display: true, text: lang.trendYAxis, color: brilliantBlues.dark },
+                        grid: { color: 'rgba(0,0,0,0.05)' },
+                        ticks: { color: brilliantBlues.text }
+                    },
+                    x: {
+                        title: { display: false, text: lang.trendXAxis },
+                        ticks: {
+                            callback: function(value, index) {
+                                return index % 4 === 0 ? this.getLabelForValue(value) : '';
+                            },
+                            autoSkip: false,
+                            maxRotation: 0,
+                            color: brilliantBlues.text
+                        },
+                         grid: { display: false }
+                    }
+                },
+                plugins: {
+                    title: { display: true, text: lang.trendChartTitle, font: { size: 16 }, color: brilliantBlues.darkest },
+                    tooltip: { callbacks: { title: tooltipTitleCallback } },
+                    legend: { labels: { color: brilliantBlues.text } },
+                    annotation: {
+                        annotations: {
+                            line1: {
+                                type: 'line',
+                                yMin: 2.5,
+                                yMax: 2.5,
+                                borderColor: 'rgb(255, 99, 132)',
+                                borderWidth: 2,
+                                borderDash: [6, 6],
+                                label: {
+                                    content: lang.trendAnnotation,
+                                    enabled: true,
+                                    position: 'end',
+                                    backgroundColor: 'rgba(255, 99, 132, 0.8)',
+                                    color: 'white',
+                                    font: { style: 'bold' }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    document.getElementById('lang-en').addEventListener('click', () => {
+        currentLanguage = 'en';
+        updateContent();
+    });
+
+    document.getElementById('lang-th').addEventListener('click', () => {
+        currentLanguage = 'th';
+        updateContent();
+    });
+
+    document.addEventListener('DOMContentLoaded', updateContent);
+</script>
+</body>
+</html>
